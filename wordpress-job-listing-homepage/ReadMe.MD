@@ -16,7 +16,7 @@ Fonts: Roboto Regular/Bold
 ## Technical Requirements
 - Homepage that looks the same as the design specification.
 - The implementation must be mobile-responsive.
-- Job openings are defined as a content type and editable in WordPress CMS.
+- Job openings are defined as a custom post type and editable in WordPress CMS.
 - SVGs will be used for all the icons.
 - Final output must be hosted in a publicy available URL (free hosting or otherwise).
 - Filters and pagination are fully working
