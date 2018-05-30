@@ -8,7 +8,9 @@ The homepage will be implemented using Drupal 8 as the CMS with the job openings
 
 ## Design and Assets
 Design specifications: http://training.prototype-interactive.com/job-listing-homepage/
+
 Assets: http://training.prototype-interactive.com/job-listing-homepage/assets.zip
+
 Fonts: Roboto Regular/Bold
 
 ## Technical Requirements

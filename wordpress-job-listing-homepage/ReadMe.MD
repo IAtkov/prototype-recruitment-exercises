@@ -8,7 +8,9 @@ The homepage will be implemented using WordPress as the CMS with the job opening
 
 ## Design and Assets
 Design specifications: http://training.prototype-interactive.com/job-listing-homepage/
+
 Assets: http://training.prototype-interactive.com/job-listing-homepage/assets.zip
+
 Fonts: Roboto Regular/Bold
 
 ## Technical Requirements
