@@ -1,4 +1,4 @@
-# Job Listing in WordPress
+# Job Listing in Sitefinity
 
 ## Requirements
 
