@@ -1,0 +1,138 @@
+﻿@model JobListing.Mvc.Models.ListJobOpeningsViewModel
+@using Telerik.Sitefinity.UI.MVC;
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using JobListing.Constants;
+
+@{ 
+    string cssActive = "active";
+    string cssNotActive = "not-active";
+}
+<div class="filter-section container">
+    @using (Html.BeginFormSitefinity(ControllerConstants.JobOpeningIndexAction, "jobOpeningForm", FormMethod.Get))
+    {
+        <input type="hidden" name="typeOfJobSelected" id="typeOfJobSelected" />
+        <input type="hidden" name="page" id="page" />
+
+        <div class="row">
+            @{
+                string cssClass = cssNotActive;
+                int count = 0;
+            }
+            @foreach (var typeOfJob in Model.TypeOfJobs)
+            {
+                if (count == 0)
+                {
+                    if (string.IsNullOrWhiteSpace(Model.ActiveTypeOfJob))
+                    {
+                        cssClass = cssActive;
+                    }
+                    else if (Model.ActiveTypeOfJob != CommonConstants.All && Model.ActiveTypeOfJob == typeOfJob)
+                    {
+                        cssClass = cssActive;
+                    }
+                    else
+                    {
+                        cssClass = cssNotActive;
+                    }
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(Model.ActiveTypeOfJob))
+                    {
+                        cssClass = cssNotActive;
+                    }
+                    else if (Model.ActiveTypeOfJob != CommonConstants.All && Model.ActiveTypeOfJob == typeOfJob)
+                    {
+                        cssClass = cssActive;
+                    }
+                    else
+                    {
+                        cssClass = cssNotActive;
+                    }
+                }
+                count++;
+
+                <div class="job-tabs col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <p class="tab-centered">@Html.Resource(ResourcesConstants.IAmLookingFor).ToUpper()</p>
+                    <p class="tab-main"><span class="@cssClass"><a href="javascript:;" data-typeOfJob="@typeOfJob" class="change-type-of-job">@typeOfJob.ToUpper() @Html.Resource(ResourcesConstants.Jobs).ToUpper()</a></span></p>
+                </div>
+            }
+            @if (Model.ActiveTypeOfJob != null && Model.ActiveTypeOfJob == CommonConstants.All)
+            {
+                cssClass = cssActive;
+            }
+            else
+            {
+                cssClass = cssNotActive;
+            }
+            <div class="job-tabs col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <p class="tab-centered">@Html.Resource(ResourcesConstants.ShowMe).ToUpper()</p>
+                <p class="change-type-of-job tab-main bolder"><span class="@cssClass"><a href="javascript:;" data-typeOfJob="CommonConstants.All" class="change-type-of-job">@Html.Resource(ResourcesConstants.AllJobs).ToUpper()</a></span></p>
+            </div>
+        </div>
+        <div class="date-filter row">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                <p class="filter-by-text">@Html.Resource(ResourcesConstants.FilterBy).ToUpper()</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <select id="dateFilter" name="dateFilter">
+                    <option value="-1">POSTING DATE</option>
+                    <option value="0">@Html.Resource(ResourcesConstants.Today).ToUpper()</option>
+                    <option value="1">@Html.Resource(ResourcesConstants.Yesterday).ToUpper()</option>
+                    <option value="7">@Html.Resource(ResourcesConstants.LastSevenDays).ToUpper()</option>
+                    <option value="14">@Html.Resource(ResourcesConstants.LastFourteenDays).ToUpper()</option>
+                    <option value="30">@Html.Resource(ResourcesConstants.LastMonth).ToUpper()</option>
+                    <option value="180">@Html.Resource(ResourcesConstants.LastSixMonth).ToUpper()</option>
+                    <option value="365">@Html.Resource(ResourcesConstants.LastYear).ToUpper()</option>
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                <select id="nationalityFilter" name="nationalityFilter">
+                    <option value="CommonConstants.All">@Html.Resource(ResourcesConstants.Nationality).ToUpper()</option>
+                    @foreach (var nationality in Model.Nationalities)
+                    {
+                        if (Model.SelectedNationality == nationality.Title)
+                        {
+                            <option selected="selected" value="@nationality.Title">@nationality.Title.ToUpper()</option>
+
+                        }
+                        else
+                        {
+                            <option value="@nationality.Title">@nationality.Title.ToUpper()</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-3 col-xs-12">
+                <select name="genderFilter" id="genderFilter">
+                    @foreach (var gender in Model.Genders)
+                    {
+                        if (Model.SelectedGender == gender.Value)
+                        {
+                            <option value="@gender.Value" selected="selected">@gender.Title.ToUpper()</option>
+                        }
+                        else
+                        {
+                            <option value="@gender.Value">@gender.Title.ToUpper()</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="create-email-notification">
+            <a href="javascript:;" class="bell">@Html.Resource(ResourcesConstants.CreateEmailNotification).ToUpper()</a>
+        </div>
+    }
+</div>
+<section class="job-section">
+    <div class="jobs-wrapper">
+        <div class="jobs">
+       @Html.Partial("_JobOpening", Model.JobOpenings)
+            <div class="load-more-btn-wrapper">
+                <a href="javascript:;" class="load-more-btn" data-loadedItems="@Model.JobOpenings.Count" data-lastPage="@Model.LastPage" data-itemsPerPage="@Model.ItemsPerPage" data-url="@Url.Action(ControllerConstants.JobOpeningLoadMoreJobs, ControllerConstants.JobOpeningController)" id="loadMoreBtn">@Html.Resource(ResourcesConstants.LoadMore).ToUpper()</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@Html.Script(Url.WidgetContent("Mvc/Scripts/JobOpening/jobOpening.js"), "bottom")

@@ -1,0 +1,130 @@
+﻿@using System.Web.Mvc;
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Modules.Pages;
+@using Telerik.Sitefinity.UI.MVC;
+@using Telerik.Sitefinity.Services;
+
+<!DOCTYPE html>
+<html @Html.RenderLangAttribute()>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" type="text/css" />
+    @Html.Section("head")
+    @Html.StyleSheet(Url.Content("~/ResourcePackages/Bootstrap/assets/dist/css/main.min.css"), "head")
+    <link rel="stylesheet" href="~/web/css/site.css" />
+
+</head>
+
+<body>
+    @Html.Section("top")
+    <div class="site-wrapper">
+        <section class="header">
+            <div class="header-content">
+                <div class="nav row">
+                    <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3">
+                        <img src="~/web/icons/logo.svg" />
+                    </div>
+                    <div class="menu col-lg-4 col-md-4 col-sm-5  col-xs-6">
+                        <ul>
+                            <li>
+                                <a href="javascript:;">Working with us</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;">How we hire</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="lang-menu col-lg-4 col-md-4 col-sm-3  col-xs-3">
+                        <select>
+                            <option value="en">En</option>
+                            <option value="bg">Bg</option>
+                        </select>
+                    </div>
+                    <div class="menu-mobile col-lg-4 col-md-4 col-sm-5  col-xs-6">
+                        <div id="menuicon"></div>
+                        <div id="showHeaderMenuPopup">
+                            <div id="headermenu">
+                                <ul id="headernav">
+                                    <li><a href="javascript:;">Working with us</a></li>
+                                    <li><a href="javascript:;">How we hire</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line col-lg-12 col-md-11 col-sm-11 col-xs-11"></div>
+                </div>
+            </div>
+            <div class="main-title">
+                <p class="text">EVERYTHING STARTS WITH A PROTOTYPE</p>
+                <h1 class="heading">JOIN US</h1>
+            </div>
+        </section>
+        <section class="content">
+            @Html.SfPlaceHolder("Contentplaceholder1")
+        </section>
+        <section class="footer-wrapper">
+            <div class="footer-content">
+                <div class="footer row">
+                    <ul class="col-lg-3 col-md-3 col-sm-3 footer-nav">
+                        <li>
+                            <a href="javascript:;">Terms & Conditions</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">FAQ</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">Privacy</a>
+                        </li>
+                    </ul>
+                    <ul class="col-lg-3 col-md-3 col-sm-3 footer-nav">
+                        <li>
+                            <a href="javascript:;">News</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">Sitemap</a>
+                        </li>
+                    </ul>
+                    <ul class="col-lg-3 col-md-3 col-sm-3 footer-nav">
+                        <li>
+                            <a href="javascript:;">Working With Us</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">Careers</a>
+                        </li>
+                        <li>
+                            <a href="javascript:;">Login</a>
+                        </li>
+                    </ul>
+                    <ul class="col-lg-3 col-md-3 col-sm-3">
+                        <li class="social-title">
+                            <p>FOLLOW US</p>
+                        </li>
+                        <li class="social-logo">
+                            <a href="javascript:;"><img src="~/web/icons/facebook.svg" /></a>
+                        </li>
+                        <li class="social-logo">
+                            <a href="javascript:;"><img src="~/web/icons/twitter.svg" /></a>
+                        </li>
+                        <li class="social-logo">
+                            <a href="javascript:;"><img src="~/web/icons/instagram.svg" /></a>
+                        </li>
+                        <li class="social-logo">
+                            <a href="javascript:;"><img src="~/web/icons/google-plus.svg" /></a>
+                        </li>
+                        <li class="social-logo">
+                            <a href="javascript:;"><img src="~/web/icons/linkedin.svg" /></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2017 All Rights Reserved, Prototype Interactive, LLC.
+            </div>
+        </section>
+    </div>
+    @Html.Script(ScriptRef.JQuery)
+    @Html.Section("bottom")
+</body>
+</html>

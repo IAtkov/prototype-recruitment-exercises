@@ -1,0 +1,7 @@
+﻿namespace Common.Constants
+{
+    public static class ContentTypes
+    {
+        public static readonly string JobOpeningType = "Telerik.Sitefinity.DynamicTypes.Model.JobOpenings.JobOpening";
+    }
+}

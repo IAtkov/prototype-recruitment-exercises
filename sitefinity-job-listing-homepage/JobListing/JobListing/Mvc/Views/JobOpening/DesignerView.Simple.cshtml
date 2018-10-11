@@ -1,0 +1,80 @@
+﻿@model System.Web.UI.Control
+
+@using Telerik.Sitefinity.Mvc;
+@using Telerik.Sitefinity.Mvc.Proxy;
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using Telerik.Sitefinity.Frontend.DynamicContent.Mvc.Models;
+@using Common.Helpers;
+@using Common.Constants;
+
+@Html.QueryBuilderScriptReferences()
+
+<uib-tabset class="nav-tabs-wrapper">
+    <uib-tab heading="Content">
+        <div class="form-group">
+            <label>What content to display</label>
+            <div class="radio">
+                <label for="allCountries">
+                    <input id="allCountries" type="radio" ng-model="properties.SelectionMode.PropertyValue" value="AllItems" />
+                    All published items
+                </label>
+            </div>
+            <div class="radio">
+                <label for="selectedCountries">
+                    <input id="selectedCountries" type="radio" ng-model="properties.SelectionMode.PropertyValue" value="SelectedItems" />
+                    Selected items
+                </label>
+                <div class="label-content">
+                    <sf-list-selector sf-dynamic-items-selector
+                                      ng-show="properties.SelectionMode.PropertyValue=='SelectedItems'"
+                                      sf-multiselect="true"
+                                      sf-sortable="true"
+                                      sf-item-type="properties.ItemType.PropertyValue"
+                                      sf-selected-ids="itemSelector.selectedItemIds">
+                    </sf-list-selector>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="radio">
+                <label for="usePaging">
+                    <input id="usePaging" type="radio" ng-model="properties.DisplayMode.PropertyValue" value="Paging" />
+                    <strong>Use paging</strong>
+                    <br />
+
+                    <span>
+                        Divide to items per page
+                        <input type="text" style="width: 40px" ng-disabled="properties.DisplayMode.PropertyValue!='Paging'" ng-model="properties.ItemsPerPage.PropertyValue" />
+                    </span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="countriesTemplateName">List template</label>
+            <div class="row">
+                <div class="col-xs-6">
+                    <select id="countriesTemplateName" ng-model="properties.ListTemplateName.PropertyValue" class="form-control">
+                        @foreach (var viewName in Html.GetViewNames(((Telerik.Sitefinity.Mvc.Proxy.MvcProxyBase)Model).GetController(), @"List\.(?<viewName>[\w\s]*)$"))
+                        {
+                            <option value="@viewName">@viewName.SplitCamelCase()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </uib-tab>
+    <uib-tab heading="Single item settings">
+        <div class="form-group m-top-md row">
+            <div class="col-xs-6">
+                <label for="newsTemplateName">Detail template</label>
+
+                <select id="newsTemplateName" ng-model="properties.DetailTemplateName.PropertyValue" class="form-control">
+                    @foreach (var viewName in Html.GetViewNames(((Telerik.Sitefinity.Mvc.Proxy.MvcProxyBase)Model).GetController(), @"Detail\.(?<viewName>[\w\s]*)$"))
+                    {
+                        <option value="@viewName"> @viewName.SplitCamelCase()</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </uib-tab>
+</uib-tabset>

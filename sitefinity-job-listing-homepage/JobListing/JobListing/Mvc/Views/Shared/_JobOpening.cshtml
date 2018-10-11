@@ -1,0 +1,44 @@
+﻿@model IEnumerable<JobListing.Mvc.Models.JobOpeningViewModel>
+@using Telerik.Sitefinity.Frontend.Mvc.Helpers;
+@using JobListing.Constants;
+
+@{
+    Layout = null;
+}
+
+@foreach (var jobOpening in Model)
+{
+    <div class="job-wrapper">
+        <div class="job">
+            <div class="job-title-row">
+                <div class="col-lg-8 col-md-7 col-sm-6 col-xs-7 job-title-wrapper">
+                    <h2 class="job-title">@jobOpening.Title</h2>
+                    <p class="job-date">@jobOpening.PostingDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 job-management-btn">
+                    <a href="javascript:;" class="job-management-link">@Html.Resource(ResourcesConstants.Management).ToUpper()</a>
+                </div>
+            </div>
+            <div class="job-description-row">
+                <p class="job-description">@Html.Raw(jobOpening.Description)</p>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <p class="job-properties">@Html.Resource(ResourcesConstants.Nationality).ToUpper()</p>
+                        <p class="job-properties-value">@jobOpening.Nationality</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <p class="job-properties">@Html.Resource(ResourcesConstants.Salary).ToUpper()</p>
+                        <p class="job-properties-value">@jobOpening.Salary</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <p class="job-properties">@Html.Resource(ResourcesConstants.LastDate).ToUpper()</p>
+                        <p class="job-properties-value">@jobOpening.LastDate.ToString("dd/MM/yyyy")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="apply-offer">
+            <a href="javascript:;">@Html.Resource(ResourcesConstants.ApplyAndOffer).ToUpper()</a>
+        </div>
+    </div>
+}
