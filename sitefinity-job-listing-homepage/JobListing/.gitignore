@@ -182,6 +182,6 @@ FakesAssemblies/
 *.lic
 *.jmconfig
 .nuget/NuGet.exe
-.vs/*
-packages/*
+.vs/
+packages/
 .nuget/NuGet.exe
